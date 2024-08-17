@@ -35,11 +35,18 @@ function Signup() {
       setError({...error, password: 'password length must be greater than 4'});
       return false;
     }
+    
+    // lets check error before submitting form
+    for(const keys in error) {
+      if(error[keys]) {
+        return false;
+      }
+    }
 
     // lets check whether a user with same credentials
     // exist or not
     axios
-      .get(`/api/users/user?username=${username}&email=${email}`)
+      .post(`/api/users/register`, formData)
       .then( res => {
         console.log(res);
       } )
@@ -48,13 +55,6 @@ function Signup() {
         return false;
       })
 
-
-      // lets check error before submitting form
-      for(keys in error) {
-        if(keys) {
-          return false;
-        }
-      }
 
     return true
   }
@@ -77,7 +77,7 @@ function Signup() {
             onChange= { (e) => setFormData( { ...formData, username: e.target.value.trim() } ) }
             onBlur= { () => {
               axios
-                .get(`/api/users/user?username=${formData.username}`)
+                .get(`/api/users/search?username=${formData.username}`)
                 .then(res => {
                   if (res.data.length > 0) {
                     setError({ ...error, username: 'username already exist' });
@@ -123,7 +123,7 @@ function Signup() {
             onChange={ e => setFormData( { ...formData, email: e.target.value } ) }
             onBlur= { () => {
               axios
-                .get(`/api/users/user?email=${formData.email}`)
+                .get(`/api/users/search?email=${formData.email}`)
                 .then(res => {
                   if (res.data.length > 0) {
                     setError({ ...error, email: 'email in use, try another' });

@@ -8,14 +8,13 @@ function Login() {
   const initialState = {
     email: '',
     password: '',
-    common: '',
   }
   const [formData, setFormData] = useState(initialState);
-  const [error, setError] = useState(initialState);
+  const [error, setError] = useState({...initialState, common: ''});
 
   function handleLogin(e) {
-    e.target.preventDefault();
-    const { email, password } = formData;
+    e.preventDefault();
+    const { password } = formData;
 
     // lets validate the password
     if(!password.length < 8) {
@@ -29,16 +28,19 @@ function Login() {
       return false;
     }
 
-    axios
-      .get("/api/users/verify")
-      .then( res => console.log(res) )
-      .catch( err => setError({...error, common: err.message}));
-
-    for(keys in error) {
-      if(keys) {
+    for(const keys in error) {
+      if(error[keys]) {
         return false;
       }
     }
+
+    axios
+      .post("/api/users/login", formData)
+      .then( res => {
+        console.log(res);
+      } )
+      .catch( err => setError({...error, common: err.message}));
+
 
     return true;
   }
@@ -46,13 +48,16 @@ function Login() {
   return (
     <div className="login">
       <h1> Login </h1>
-      <form >
+      <form
+        onSubmit={ e => handleLogin(e) } >
         <div className="email">
           <Input
             type="email"
             placeholder="enter email"
             value={formData.email}
-            onChange={ e => setFormData({...error, email: e.target.value.trim()}) } />
+            label="Enter email: "
+            error={error.email}
+            onChange={ e => setFormData({...formData, email: e.target.value.trim()}) } />
         </div>
 
         <div className="password">
@@ -60,8 +65,11 @@ function Login() {
             type="password"
             placeholder="enter password"
             value={formData.password}
-            onChange={ e => setFormData({...error, password: e.target.value.trim()}) } />
+            label="Enter password: "
+            error={error.password}
+            onChange={ e => setFormData({...formData, password: e.target.value.trim()}) } />
         </div>
+        <button type="submit">login</button>
       </form>
     </div>
   )
