@@ -49,6 +49,13 @@ function Signup() {
       })
 
 
+      // lets check error before submitting form
+      for(keys in error) {
+        if(keys) {
+          return false;
+        }
+      }
+
     return true
   }
 

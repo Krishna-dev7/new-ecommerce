@@ -7,7 +7,11 @@ router
 .post(registerUser)
 
 router
-.route("/user")
+.route("/search")
 .get(getUser)
+
+router
+.route("/verify")
+.post()
 
 export default router;

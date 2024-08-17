@@ -34,6 +34,35 @@ async function getUser(req, res) {
   res.json(userExist);
 }
 
+// Todo:
+// get credentials
+// match with our database
+// generate access and refresh token
+
+async function loginUser(req, res, next) {
+  try {
+    const { email, password } = req.body;
+    if (!email && password) {
+      res.json(new APIResponse(400, 'email and password are required'));
+    }
+
+    const existedUser = await User.findOne({email});
+    if (!existedUser) {
+      res.json(new APIResponse(400, "user doesn't exist"));
+    }
+
+    const verifiedUser = await existedUser.comparePassword(password);
+    if(!verifiedUser) {
+      res.json(new APIResponse(400, "invalid password"));
+    }
+
+    
+
+  } catch (error) {
+    
+  }
+}
+
 export default registerUser;
 export {
   getUser

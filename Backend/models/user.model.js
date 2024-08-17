@@ -41,7 +41,7 @@ userSchema.pre("save", async function (next) {
 
 // creating a method to compare password
 userSchema.methods.comparePassword = async function(password) {
-  await bcrypt.compare(password, this.password);
+  return await bcrypt.compare(password, this.password);
 }
 
 // generating access and refresh token
@@ -56,6 +56,18 @@ userSchema.methods.generateAccessToken = async function() {
     process.env.ACCESS_TOKEN_SECRET,
     {
       expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+    }
+  )
+}
+
+userSchema.methods.generateRefreshToken = async function() {
+  jwt.sign(
+    {
+      _id: this._id
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: process.env.REFRESH_TOKEN_EXPIRY
     }
   )
 }
