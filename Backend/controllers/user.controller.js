@@ -1,4 +1,20 @@
 import User from "../models/user.model.js";
+import APIResponse from "../utils/APIResponse.js";
+
+async function generateAccessAndRefreshToken(userId) {
+  try {
+    const user = await User.findById(userId);
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
+
+    user.refreshToken = refreshToken;
+    await user.save({validateBeforeSave: false});
+
+    return {accessToken, refreshToken};
+  } catch (error) {
+    console.log("generation error :: " + error.message);
+  }
+}
 
 async function registerUser(req, res) {
   const {username, fullName, email, password} = req.body;
@@ -34,7 +50,71 @@ async function getUser(req, res) {
   res.json(userExist);
 }
 
+async function loginUser(req, res) {
+  try {
+    const { email, password } = req.body;
+    if (!(email && password)) {
+      res.json(new APIResponse(400, 'email and password are required'));
+    }
+
+    const existingUser = await User.findOne({email});
+    if (!existingUser) {
+      console.log("existed user: ", existingUser);
+      return res.json(new APIResponse(400, "user doesn't exist"));
+    }
+
+    const verifiedUser = await existingUser.comparePassword(password);
+    if(!verifiedUser) {
+      console.log("verified User: ", verifiedUser);
+      res.json(new APIResponse(400, "invalid password"));
+    }
+    console.log("verifiedUser: ", verifiedUser);
+
+    const { accessToken, refreshToken } = await generateAccessAndRefreshToken(existingUser._id);
+    const options = {
+      httpOnly: true,
+      secure: true,
+    }
+
+    res
+      .status(200)
+      .cookie("access token", accessToken, options)
+      .cookie("refresh token", refreshToken, options)
+      .json(new APIResponse(
+        200,
+        "logedin successfully",
+        { user: existingUser, accessToken, refreshToken }
+      ))
+
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+async function logout(req, res) {
+  await User.findByIdAndUpdate(
+    req.user._id,
+    { $unset: {
+      refreshToken: 1
+    } },
+    { new: true }
+  )
+
+  const options = {
+    httpOnly: true,
+    secure: true
+  }
+
+  res
+    .status(200)
+    .clearCookie("access token", options)
+    .clearCookie("refresh token", options)
+    .json(new APIResponse(200, "logout successfully"));
+}
+
 export default registerUser;
 export {
-  getUser
+  getUser,
+  loginUser,
+  logout
 };

@@ -1,6 +1,10 @@
 import Input from "./Input"
 import { useState } from "react"
 import axios from "axios";
+import authService from "../app/authService.js";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../store/authSlice.js";
 
 function Signup() {
 
@@ -12,11 +16,12 @@ function Signup() {
   };
   const [formData, setFormData] = useState(initialData);
   const [error, setError] = useState(initialData);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-
-  function handleSubmit(e){
+  async function handleSubmit(e){
     e.preventDefault();
-    const { username, password, email } = formData;
+    const { username} = formData;
     
     // lets validate form data
     if(username.length < 4) {
@@ -24,32 +29,26 @@ function Signup() {
       return false;
     } 
 
-    // password validations
-    if(!password.length < 8){
-      let regx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g;
-      if (!regx.test(password)) {
-        setError({...error, password: 'password must contain digits, letters and minimum of 8 characters'})
-        return false
+    
+    // lets check error before submitting form
+    for(const keys in error) {
+      if(error[keys]) {
+        return false;
       }
-    } else {
-      setError({...error, password: 'password length must be greater than 4'});
-      return false;
     }
 
-    // lets check whether a user with same credentials
-    // exist or not
-    axios
-      .get(`/api/users/user?username=${username}&email=${email}`)
-      .then( res => {
-        console.log(res);
-      } )
-      .catch (err => {
-        setError({...error, username: err.message});
-        return false;
-      })
+    try {
+      const result = await authService.createAccount(formData);
+      if(result) {
+        console.log("signup result: ",result);
+        dispatch(login(result));
+        navigate("/");
+      }
+    } catch (error) {
+      console.log("create account error: ", error.message);
+    }
 
-
-    return true
+    return false;
   }
 
   return (
@@ -70,7 +69,7 @@ function Signup() {
             onChange= { (e) => setFormData( { ...formData, username: e.target.value.trim() } ) }
             onBlur= { () => {
               axios
-                .get(`/api/users/user?username=${formData.username}`)
+                .get(`/api/users/search?username=${formData.username}`)
                 .then(res => {
                   if (res.data.length > 0) {
                     setError({ ...error, username: 'username already exist' });
@@ -102,6 +101,19 @@ function Signup() {
             placeholder="Enter password"
             error={error.password}
             value={formData.password}
+            onBlur={ e => {
+              if(!e.target.value.length < 8){
+                let regx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g;
+                if (!regx.test(e.target.value)) {
+                  setError({...error, password: 'password must contain digits, letters and minimum of 8 characters'})
+                  return false
+                }
+                setError({...error, password: ''});
+              } else {
+                setError({...error, password: 'password length must be greater than 4'});
+                return false;
+              }
+            }}
             onChange={ e => setFormData( { ...formData, password: e.target.value } ) }
             />
         </div>
@@ -116,7 +128,7 @@ function Signup() {
             onChange={ e => setFormData( { ...formData, email: e.target.value } ) }
             onBlur= { () => {
               axios
-                .get(`/api/users/user?email=${formData.email}`)
+                .get(`/api/users/search?email=${formData.email}`)
                 .then(res => {
                   if (res.data.length > 0) {
                     setError({ ...error, email: 'email in use, try another' });

@@ -4,6 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 import userRouter from "./routes/user.routes.js"
 // import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 const app = express();
 
 async function connectDB() {
@@ -32,8 +33,9 @@ connectDB()
 
 // middlewares
 // app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.urlencoded())
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(cookieParser());
 
 // defining routes
 app.get("/api/home", (req, res) => {
@@ -44,3 +46,5 @@ app.get("/api/home", (req, res) => {
 
 // authService
 app.use("/api/users", userRouter);
+// cartService
+app.use("/api/carts", cartRouter);

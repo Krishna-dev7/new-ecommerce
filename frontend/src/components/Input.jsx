@@ -21,6 +21,7 @@ function Input({
 
       <input
         type={type}
+        id={id}
         className={`$className px-3 py-1 shadow-md w-full text-black rounded-sm  border-none`}
         placeholder={placeholder}
         ref={ref} 
