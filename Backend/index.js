@@ -46,3 +46,5 @@ app.get("/api/home", (req, res) => {
 
 // authService
 app.use("/api/users", userRouter);
+// cartService
+app.use("/api/carts", cartRouter);

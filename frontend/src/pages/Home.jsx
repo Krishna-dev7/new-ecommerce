@@ -6,7 +6,6 @@ function Home() {
   return (
     <>  
       <h1> Our Home page </h1>
-      <Signup />
     </>
   )
 }
