@@ -106,9 +106,9 @@ async function logout(req, res) {
   }
 
   res
-    .statusCode(200)
-    .clearCookie("accessToken", options)
-    .clearCookie("refreshToken", options)
+    .status(200)
+    .clearCookie("access token", options)
+    .clearCookie("refresh token", options)
     .json(new APIResponse(200, "logout successfully"));
 }
 

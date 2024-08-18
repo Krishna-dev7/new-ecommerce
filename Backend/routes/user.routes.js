@@ -18,6 +18,6 @@ router
 
 router 
   .route("/logout")
-  .get(verifyJwt, logout)
+  .post(verifyJwt, logout)
 
 export default router;

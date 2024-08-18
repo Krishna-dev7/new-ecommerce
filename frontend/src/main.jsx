@@ -11,23 +11,27 @@ import Home from './pages/home.jsx'
 import Signup from './components/Signup.jsx'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
+import store from './store/store.js'
+import { Provider } from 'react-redux';
 
 // const touter = createBrowserRouter({
     
 // })
 
 createRoot(document.getElementById('root')).render(
-    <BrowserRouter>
-    <Navbar/>
-    <App/>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/order" element={<Order />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/register" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
-    </Routes>
-    <Footer/>
+    <Provider store={store} >
+      <BrowserRouter>
+        <Navbar/>
+        <App/>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/register" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        <Footer/>
     </BrowserRouter>
+    </Provider>
 )

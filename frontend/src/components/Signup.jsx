@@ -1,6 +1,10 @@
 import Input from "./Input"
 import { useState } from "react"
 import axios from "axios";
+import authService from "../app/authService.js";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../store/authSlice.js";
 
 function Signup() {
 
@@ -12,9 +16,10 @@ function Signup() {
   };
   const [formData, setFormData] = useState(initialData);
   const [error, setError] = useState(initialData);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-
-  function handleSubmit(e){
+  async function handleSubmit(e){
     e.preventDefault();
     const { username, password, email } = formData;
     
@@ -45,18 +50,28 @@ function Signup() {
 
     // lets check whether a user with same credentials
     // exist or not
-    axios
-      .post(`/api/users/register`, formData)
-      .then( res => {
-        console.log(res);
-      } )
-      .catch (err => {
-        setError({...error, username: err.message});
-        return false;
-      })
+    // axios
+    //   .post(`/api/users/register`, formData)
+    //   .then( res => {
+    //     console.log(res);
+    //   } )
+    //   .catch (err => {
+    //     setError({...error, username: err.message});
+    //     return false;
+    //   })
 
+    try {
+      const result = await authService.createAccount(formData);
+      if(result) {
+        console.log("signup result: ",result);
+        dispatch(login(result));
+        navigate("/");
+      }
+    } catch (error) {
+      console.log("create account error: ", error.message);
+    }
 
-    return true
+    return false;
   }
 
   return (

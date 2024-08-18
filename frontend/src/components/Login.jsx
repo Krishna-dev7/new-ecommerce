@@ -2,6 +2,10 @@ import Input from "./Input";
 import Button from "./Button";
 import { useState } from "react";
 import axios from "axios";
+import authService from "../app/authService.js";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../store/authSlice.js";
 
 function Login() {
 
@@ -11,8 +15,10 @@ function Login() {
   }
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState({...initialState, common: ''});
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
     const { password } = formData;
 
@@ -34,15 +40,20 @@ function Login() {
       }
     }
 
-    axios
-      .post("/api/users/login", formData)
-      .then( res => {
-        console.log(res);
-      } )
-      .catch( err => setError({...error, common: err.message}));
+    // axios
+    //   .post("/api/users/login", formData)
+    //   .then( res => {
+    //     console.log(res);
+    //   } )
+    //   .catch( err => setError({...error, common: err.message}));
 
-
-    return true;
+    const loginResult = await authService.login(formData);
+    if(loginResult) {
+      console.log(loginResult);
+      dispatch(login(loginResult));
+      navigate("/");
+    }
+    return false;
   }
 
   return (

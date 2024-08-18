@@ -1,13 +1,32 @@
 import { useEffect,useState } from "react"
-import authService from "../app/authService"
+import authService from "../app/authService.js"
 import {assets} from "../assets/assets"
 import {Link} from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { logout } from "../store/authSlice.js"
 
 function Navbar() {
+
+    const authStatus = useSelector( (store) => store.auth.status );
+    const dispatch = useDispatch();
+
 
   const [active,setActive]=useState("Home")
   let current='cursor-pointer border-b-2 border-b-blue-900 text-blue-900 font-semibold'
   let other='cursor-pointer text-blue-900 font-semibold'
+
+//   const navLinks = [
+//     {name: "Home", link: "/home", status: true},
+//     {name: "About", link: "/about", status: true},
+//     {name: "Contact", link: "/contact", status: authStatus},
+//     {name: "Login", link: "/login", status: !authStatus},
+//     {name: "Register", link: "/register", status: !authStatus},
+//     {
+//         name: "logout",
+//         link: "/logout",
+//         status: authStatus
+//     }
+//   ]
 
   return (
     <>
@@ -27,8 +46,22 @@ function Navbar() {
                 </ul>
             </div>
             <div className='grid gap-2 md:flex md:gap-3 md:mx-3 lg:gap-5 duration-300'>
+               { !authStatus &&  <>
                 <div><Link to="/login"><button onClick={()=>setActive("")} className='btn bg-transparent border-2 text-blue-900  border-blue-900 rounded-3xl px-2 py-1 my-2 text-[12px] md:text-[15px] md:px-4 lg:px-6 duration-300'>Log In</button></Link></div>
-                <div><Link to="/register"><button onClick={()=>setActive("")} className='btn bg-transparent border-2 text-blue-900 border-blue-900 rounded-3xl px-1 py-1 text-[12px] my-2 md:text-[15px] md:px-4 lg:px-6 duration-300'>Sign Up</button></Link></div>
+                <div><Link to="/register"><button onClick={()=>setActive("")} className='btn bg-transparent border-2 text-blue-900 border-blue-900 rounded-3xl px-1 py-1 text-[12px] my-2 md:text-[15px] md:px-4 lg:px-6 duration-300'>Sign Up</button></Link></div>)  
+               </> }
+
+               { authStatus && <div className="text-black">
+                    <button
+                     className="bg-white px-4 py-2 rounded-md shadow-md border border-1 border-black"
+                     onClick={ async () => {
+                        const res = await authService.logout();
+                        res ? dispatch(logout()) : null;
+                    } } >
+                        Logout
+                    </button>
+               </div> }
+
             </div>
         </div>
     </>
