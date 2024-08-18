@@ -20,32 +20,12 @@ function Login() {
 
   async function handleLogin(e) {
     e.preventDefault();
-    const { password } = formData;
-
-    // lets validate the password
-    if(!password.length < 8) {
-      const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g;
-      if(!regex.test(password)) {
-        setError({...error, password: 'password must contain letters and digits'})
-        return false;
-      }
-    } else {
-      setError({...error, password: 'password must contain characters of 8 length'})
-      return false;
-    }
 
     for(const keys in error) {
       if(error[keys]) {
         return false;
       }
     }
-
-    // axios
-    //   .post("/api/users/login", formData)
-    //   .then( res => {
-    //     console.log(res);
-    //   } )
-    //   .catch( err => setError({...error, common: err.message}));
 
     const loginResult = await authService.login(formData);
     if(loginResult) {
@@ -78,6 +58,20 @@ function Login() {
             value={formData.password}
             label="Enter password: "
             error={error.password}
+            onBlur={  e => {
+                if(!e.target.value.length < 8) {
+                  const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g;
+                  if(!regex.test(e.target.value)) {
+                    setError({...error, password: 'password must contain letters and digits'})
+                    return false;
+                  }
+                  setError({...error, password: ''});
+                } else {
+                  setError({...error, password: 'password must contain characters of 8 length'})
+                  return false;
+                }
+              } 
+            }
             onChange={ e => setFormData({...formData, password: e.target.value.trim()}) } />
         </div>
         <button type="submit">login</button>

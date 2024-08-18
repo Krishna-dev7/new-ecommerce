@@ -21,7 +21,7 @@ function Signup() {
 
   async function handleSubmit(e){
     e.preventDefault();
-    const { username, password, email } = formData;
+    const { username} = formData;
     
     // lets validate form data
     if(username.length < 4) {
@@ -29,17 +29,6 @@ function Signup() {
       return false;
     } 
 
-    // password validations
-    if(!password.length < 8){
-      let regx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g;
-      if (!regx.test(password)) {
-        setError({...error, password: 'password must contain digits, letters and minimum of 8 characters'})
-        return false
-      }
-    } else {
-      setError({...error, password: 'password length must be greater than 4'});
-      return false;
-    }
     
     // lets check error before submitting form
     for(const keys in error) {
@@ -47,18 +36,6 @@ function Signup() {
         return false;
       }
     }
-
-    // lets check whether a user with same credentials
-    // exist or not
-    // axios
-    //   .post(`/api/users/register`, formData)
-    //   .then( res => {
-    //     console.log(res);
-    //   } )
-    //   .catch (err => {
-    //     setError({...error, username: err.message});
-    //     return false;
-    //   })
 
     try {
       const result = await authService.createAccount(formData);
@@ -124,6 +101,19 @@ function Signup() {
             placeholder="Enter password"
             error={error.password}
             value={formData.password}
+            onBlur={ e => {
+              if(!e.target.value.length < 8){
+                let regx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g;
+                if (!regx.test(e.target.value)) {
+                  setError({...error, password: 'password must contain digits, letters and minimum of 8 characters'})
+                  return false
+                }
+                setError({...error, password: ''});
+              } else {
+                setError({...error, password: 'password length must be greater than 4'});
+                return false;
+              }
+            }}
             onChange={ e => setFormData( { ...formData, password: e.target.value } ) }
             />
         </div>
