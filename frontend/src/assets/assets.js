@@ -5,6 +5,7 @@ import fb_icon from "./fb_icon.png"
 import twit_icon from "./twit_icon.png"
 import insta_icon from "./insta_icon.png"
 import namaste_icon from "./namaste_icon.png"
+import video from "./login.gif"
 export const assets={
     logo,
     basket_icon,

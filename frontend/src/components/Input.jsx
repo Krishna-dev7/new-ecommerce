@@ -22,12 +22,12 @@ function Input({
       <input
         type={type}
         id={id}
-        className={` px-3 py-1 shadow-xm w-full text-black rounded-md outline-none ${className}`}
+        className={` px-3 py-1 bg-transparent shadow-xm w-full text-black rounded-md outline-none ${className}`}
         placeholder={placeholder}
         ref={ref} 
         {...props} />
 
-      { error && <p className="text-red-600 mt-3 font-bold text-md" >
+      { error && <p className="text-red-600 mt-3 font-normal text-md" >
           { error }
         </p> }
     </div>

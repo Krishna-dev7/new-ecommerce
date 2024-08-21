@@ -52,8 +52,8 @@ function Signup() {
   }
 
   return (
-    <div className=" flex justify-center items-center h-screen w-full bg-zinc-700">
-    <div className="w-96 p-6 shadow-lg bg-zinc-950 rounded-md border-solid border-4 border-indigo-600">
+    <div className=" flex justify-center items-center h-screen w-screen">
+    <div className="w-96 p-6 shadow-lg rounded-md border-solid border-4 border-indigo-600">
       <h1 className="text-white text-center font-bold text-xl  decoration-green-400">Signup form</h1>
       <hr className="border-double border-indigo-600 border-2 mt-2"></hr>
       <form onSubmit={ (e) => handleSubmit(e) }>
