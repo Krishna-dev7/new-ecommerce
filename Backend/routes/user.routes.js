@@ -1,5 +1,5 @@
 import { Router } from "express";
-import registerUser, {getUser, loginUser, logout} from "../controllers/user.controller.js";
+import registerUser, {getUser, loginUser, logout, search} from "../controllers/user.controller.js";
 import verifyJwt from "../middlewares/verifyJwt.js";
 const router = Router();
 
@@ -9,7 +9,7 @@ router
 
 router
   .route("/search")
-  .get(getUser);
+  .get(search);
 
 router
   .route("/login")
@@ -19,5 +19,9 @@ router
 router 
   .route("/logout")
   .post(verifyJwt, logout)
+
+router
+  .route("/getUser")
+  .get(verifyJwt, getUser);
 
 export default router;

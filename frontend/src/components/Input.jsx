@@ -14,7 +14,7 @@ function Input({
   return (
     <div className="w-full mb-5 text-lg px-5 py-3" >
       { label && <label
-        className="block text-lg mb-3 text-zinc-100"
+        className="block text-lg mb-3 text-black"
         htmlFor={id}>
         {label}
       </label> }
@@ -22,7 +22,7 @@ function Input({
       <input
         type={type}
         id={id}
-        className={`$className px-3 py-1 shadow-md w-full text-black rounded-sm  border-none`}
+        className={` px-3 py-1 shadow-xm w-full text-black rounded-md outline-none ${className}`}
         placeholder={placeholder}
         ref={ref} 
         {...props} />

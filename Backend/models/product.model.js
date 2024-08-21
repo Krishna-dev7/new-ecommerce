@@ -22,9 +22,12 @@ const productSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User'
+  },
+  image: {
+    type: String,
   }
 }, {timestamps: true})
 
 
-const Product = mongoose.model(Product, productSchema);
+const Product = mongoose.model("Product", productSchema);
 export default Product;

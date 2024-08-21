@@ -3,8 +3,10 @@ dotenv.config();
 import express from "express";
 import mongoose from "mongoose";
 import userRouter from "./routes/user.routes.js"
-// import bodyParser from "body-parser";
+import productRouter from "./routes/product.routes.js"
+import cartRouter from "./routes/cart.routes.js";
 import cookieParser from "cookie-parser";
+import APIResponse from "./utils/APIResponse.js";
 const app = express();
 
 async function connectDB() {
@@ -21,7 +23,7 @@ async function connectDB() {
 }
 
 connectDB()
-.then ( result => {
+.then ( () => {
   app.listen(process.env.PORT, () => {
     console.log("server started listening at port: ", process.env.PORT);
   });
@@ -48,3 +50,12 @@ app.get("/api/home", (req, res) => {
 app.use("/api/users", userRouter);
 // cartService
 app.use("/api/carts", cartRouter);
+// productService
+app.use("/api/products", productRouter);
+
+
+app.use((err, req, res, next) => {
+  console.log("error middleware: ", err.message);
+  res.json(new APIResponse(err.status, err.message));
+  next(err);
+} )

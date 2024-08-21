@@ -43,7 +43,7 @@ async function registerUser(req, res) {
   .json({user});
 }
 
-async function getUser(req, res) {
+async function search(req, res) {
   const { email, username } = req.query;
   const userExist = await User.find({ $or: [{username}, {email}] });
   console.log(userExist);
@@ -112,9 +112,23 @@ async function logout(req, res) {
     .json(new APIResponse(200, "logout successfully"));
 }
 
+async function getUser(req, res) {
+  try {
+    const user = req.user ?? false;
+    if(user) {
+      return res.json(user);
+    }
+
+    res.json({user: false});
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 export default registerUser;
 export {
   getUser,
+  search,
   loginUser,
   logout
 };

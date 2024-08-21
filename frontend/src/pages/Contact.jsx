@@ -28,23 +28,23 @@ function Contact() {
     }
   };
   return (
-    <div>
+    <div className='w-screen flex justify-center items-center flex-col mt-20' >
       <h1 className=' text-4xl w-fit m-auto my-3 md:text-5xl'>Contact Us</h1>
       <h2 className='text-2xl w-fit m-auto my-4 md:text-3xl'>Do you have any queries?</h2>
       {/* form */}
-      <form onSubmit={onSubmit}>
-        <div className='w-[80%] m-auto grid justify-center justify-items-center p-3 gap-4 rounded-md lg:grid-cols-2 lg:gap-y-10 py-10 bg-gray-800 mb-5' >
+      <form onSubmit={onSubmit} className='w-1/2 ' >
+        <div className='w-full m-auto grid grid-cols-10 p-3 gap-4 rounded-md lg:grid-cols-2 lg:gap-y-10 py-10  mb-5' >
           <div>
-            <input className='p-2 text-black h-14 w-64 rounded-md text-lg md:w-[480px] lg:w-[31vw] duration-300' type="text" name='Name' placeholder='Enter your full name' required />
+            <input className='p-2 border border-1 border-black outline-none text-black h-14 w-40 rounded-md text-lg md:w-[100%] lg:w-[100%] duration-300' type="text" name='Name' placeholder='Enter your full name' required />
           </div>
           <div>
-            <input className='p-2 text-black h-14 w-64 rounded-md text-lg md:w-[480px] lg:w-[31vw] duration-300' type="email" name='Email' placeholder='Enter your email address' required />
+            <input className='p-2  border border-1 border-black outline-none text-black h-14 w-40 rounded-md text-lg md:w-[100%] lg:w-[100%] duration-300' type="email" name='Email' placeholder='Enter your email address' required />
           </div>
-          <div className='lg:col-span-2'>
-            <textarea className='p-2 text-black text-lg w-64 h-36 rounded-md md:w-[480px] lg:w-[71vw] lg:h-48 duration-300' name='Message' placeholder='Description' required></textarea>
+          <div className=' col-span-full'>
+            <textarea className='p-2  border border-1 border-black outline-none text-black text-lg w-full h-36 rounded-md md:w-[100%] lg:w-[100%] lg:h-48 duration-300' name='Message' placeholder='Description' required></textarea>
           </div>
-          <div className='lg:col-span-2'>
-            <button className='p-2 text-white text-lg w-64 h-14 bg-slate-800 border-2 rounded-md hover:bg-slate-500 duration-300 md:w-[480px] lg:w-[71vw]' type='submit'>Send</button>
+          <div className=' place-self-center col-span-full'>
+            <button className='p-2  border border-1 border-black outline-none text-white text-md w-full px-7 py-2 h-14 bg-slate-800 rounded-lg hover:bg-slate-500 duration-300 md:w-[80%] lg:w-[100%]' type='submit'>Send</button>
           </div>
         </div>
       </form>

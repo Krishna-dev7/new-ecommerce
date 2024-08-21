@@ -23,13 +23,6 @@ class AuthService{
     }
   }
 
-  // axios
-  //     .post("/api/users/login", formData)
-  //     .then( res => {
-  //       console.log(res);
-  //     } )
-  //     .catch( err => setError({...error, common: err.message}));
-
   async login({email, password}) {
     try {
       const res = await axios.post("/api/users/login", {email, password});
@@ -52,6 +45,18 @@ class AuthService{
       return res.data.statusCode < 400;
     } catch (error) {
       console.log("auth service logout error: ", error.message);
+    }
+  }
+
+  async getCurrentUser() {
+    try {
+      const currentUser = await axios.get("/api/users/getUser");
+      if(currentUser.data.statusCode < 400) {
+        return currentUser.data;
+      }
+      return false;
+    } catch (error) {
+      console.log(error.message);
     }
   }
 }

@@ -8,7 +8,7 @@ function Footer() {
     <>
       <div className={`bg-white gap-y-4 p-4 grid justify-center w-screen justify-items-center items-center md:flex md:items-center lg:justify-around`}>
         <div className='logo'>
-          <img className='animate-pulse ' src={assets.namaste_icon} alt="" />
+          <img className='animate-pulse w-40 h-40 rounded-full ' src={"https://cdn.dribbble.com/users/366134/screenshots/3714781/media/c052eba31fbf99c80b79c360732cc359.gif"} alt="" />
         </div>
         <div className='ul-section'>
           <ul className='grid grid-cols-2 gap-7 justify-center justify-items-center md:flex mx-6 md:gap-3 lg:gap-10'>

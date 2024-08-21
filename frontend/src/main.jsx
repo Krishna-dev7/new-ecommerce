@@ -1,37 +1,57 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import Cart from './pages/Cart'
 import Order from './pages/Order'
 import Contact from './pages/Contact'
 import Login from './components/Login'
-import Home from './pages/home.jsx'
-import Signup from './components/Signup.jsx'
-import Navbar from './components/Navbar.jsx'
-import Footer from './components/Footer.jsx'
+import Home from './pages/Home.jsx'
+import Signup from './pages/Signup.jsx'
 import store from './store/store.js'
 import { Provider } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import AddProduct from './components/AddProduct.jsx'
 
-// const touter = createBrowserRouter({
-    
-// })
+const router = createBrowserRouter([
+  {
+    path:  "/",
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Home />
+      },
+      {
+        path: "/contact",
+        element: <Contact />
+      },
+      {
+        path: "/login",
+        element: <Login />
+      },
+      {
+        path: "/signup",
+        element: <Signup />
+      },
+      {
+        path: "/cart",
+        element: <Cart />
+      },
+      {
+        path:  "/order",
+        element: <Order />
+      },
+      {
+        path:  "/add-product",
+        element: <AddProduct />
+
+      }
+    ]
+  }
+])
 
 createRoot(document.getElementById('root')).render(
-    <Provider store={store} >
-      <BrowserRouter>
-        <Navbar/>
-        <App/>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/order" element={<Order />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/register" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-        <Footer/>
-    </BrowserRouter>
-    </Provider>
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider> 
 )
