@@ -37,8 +37,10 @@ function Login() {
   }
 
   return (
-    <div className="login">
-      <h1> Login </h1>
+    <div className="flex justify-center items-center h-screen w-full bg-zinc-700">
+      <div className="login w-96 p-6 shadow-lg bg-zinc-950 rounded-md border-solid border-4 border-indigo-600">
+      <h1 className="text-white text-center font-bold text-xl  decoration-green-400">Login</h1>
+      <hr className="border-double border-indigo-600 border-2 mt-2"></hr>
       <form
         onSubmit={ e => handleLogin(e) } >
         <div className="email">
@@ -74,8 +76,12 @@ function Login() {
             }
             onChange={ e => setFormData({...formData, password: e.target.value.trim()}) } />
         </div>
-        <button type="submit">login</button>
+        <div className="flex justify-center">
+        <button type="submit" className="px-5 py-2  text-black border-black bg-orange-400 rounded-md text-white font-bold">Login</button>
+        </div>
+        
       </form>
+      </div>
     </div>
   )
 }
