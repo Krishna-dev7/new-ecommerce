@@ -77,7 +77,7 @@ function Login() {
             onChange={ e => setFormData({...formData, password: e.target.value.trim()}) } />
         </div>
         <div className="flex justify-center">
-        <button type="submit" className="px-5 py-2  text-black border-black bg-orange-400 rounded-md text-white font-bold">Login</button>
+        <button type="submit" className="px-5 py-2  text-black border-black bg-orange-400 rounded-md font-bold">Login</button>
         </div>
         
       </form>
