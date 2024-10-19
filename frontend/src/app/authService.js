@@ -51,7 +51,7 @@ class AuthService{
   async getCurrentUser() {
     try {
       const currentUser = await axios.get("/api/users/getUser");
-      if(currentUser.data.statusCode < 400) {
+      if(currentUser.data) {
         return currentUser.data;
       }
       return false;

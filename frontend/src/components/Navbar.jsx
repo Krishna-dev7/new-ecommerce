@@ -10,7 +10,6 @@ function Navbar() {
     const authStatus = useSelector( (store) => store.auth.status );
     const dispatch = useDispatch();
 
-
   const [active,setActive]=useState("Home")
   let current='cursor-pointer border-b-2 border-b-blue-900 text-blue-900 font-semibold'
   let other='cursor-pointer text-blue-900 font-semibold'

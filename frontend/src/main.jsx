@@ -7,6 +7,7 @@ import Contact from './pages/Contact'
 import Login from './components/Login'
 import Home from './pages/Home.jsx'
 import Signup from './pages/Signup.jsx'
+import ProductDetail from './pages/ProductDetail.jsx'
 import store from './store/store.js'
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
         path:  "/add-product",
         element: <AddProduct />
 
+      },
+      {
+        path: "/ProductDetail/:id",
+        element: <ProductDetail />
       }
     ]
   }

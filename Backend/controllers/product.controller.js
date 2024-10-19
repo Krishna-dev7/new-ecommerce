@@ -25,14 +25,16 @@ export async function createProduct(req, res) {
       description,
       price,
       quantity=1,
-      userId
+      userId,
+      image
     } = req.body;
     const product = await Product.create({
       slug,
       description,
       price,
       quantity,
-      userId
+      userId,
+      image
     });
   
     console.log(product);

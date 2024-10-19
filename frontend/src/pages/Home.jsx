@@ -17,10 +17,6 @@ function Home() {
   }, [setProducts] )
 
 
-  function showDetail(id) {
-
-  }
-
   return (
     <>  
       <div className=" mt-15 gap-10 rounded-md h-fit w-full items-center flex flex-col justify-center text-white">
@@ -28,12 +24,14 @@ function Home() {
         { products?.length > 0 ? products.map( p => {
           return <Product
            key={p._id} className="flex justify-center items-center border-2 text-orange-600 rounded w-2/3 z-20">
-            <div className="flex flex-col items-center w-full text-center text-sm ">
-            <img src={p.image} alt="" className="w-60 h-60 scale-90 rounded-full px-2 py-2"/>
-            <p className="capitalize font-semibold text-lg"> {p.slug} </p>
-            <p className="capitalize"> {p.description} </p>
-            <p className="capitalize font-bold text-purple-800"> { p.price } </p>
-            </div>
+            <a href={`/ProductDetail/${p._id}`}>
+              <div className="flex flex-col items-center w-full text-center text-sm ">
+              <img src={p.image} alt="" className="w-60 h-60 scale-90 rounded-full px-2 py-2"/>
+              <p className="capitalize font-semibold text-lg"> {p.slug} </p>
+              <p className="capitalize"> {p.description} </p>
+              <p className="capitalize font-bold text-purple-800"> { p.price } </p>
+              </div>
+            </a>
            
           </Product>} ) : <div className="text-black bg-[rgb(251,243,203)] w-screen flex justify-center h-screen items-center" >
             <p>

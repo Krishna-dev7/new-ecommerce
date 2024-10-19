@@ -1,8 +1,10 @@
-function Product({children, className=''}) {
+function Product({children, onClick=() => null,  className=''}) {
 
   const style = " bg-[#ebd3f8] p-5 border-none "
   return <>
-    <div className={ `${style} ${className}` }  >
+    <div
+      onClick={onClick}
+       className={ `${style} ${className}` }  >
       { children }
     </div>
   </>

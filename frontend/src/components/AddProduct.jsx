@@ -3,21 +3,31 @@ import Button from "./Button";
 import Textarea from "./Textarea";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import productService from "../app/productService";
+import cloudService from "../app/cloudService";
 
 function AddProduct() {
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState(null);
 
   async function addProductOnSubmit(data) {
-    
-  }
+    const fileId = data.image[0] ? await cloudService.uploadFile(data.image[0]) : null;
+    const image = await cloudService.getFilePreview(fileId.$id);
+    if (image) {
+      productService.createProduct({...data, image})
+      .then(res => console.log(res))
+      .catch(err => setError(err))
+    } else {
+      console.log("fileid is null");
+    }
+  } 
 
   return (
     <div className="w-full bg-purple-200 shadow-lg border border-1 border-black py-10 rounded-lg flex flex-col my-10 justify-center items-center" >
       <h1 className="text-3xl mb-6 font-normal">  Add <span className="underline" >Product</span> </h1>
       <form
         className="w-full py-10 px-20 grid grid-cols-2 "
-         onSubmit={handleSubmit}>
+         onSubmit={handleSubmit(addProductOnSubmit)}>
         <Input
           type="text"
           label="Enter a slug"
@@ -70,14 +80,14 @@ function AddProduct() {
           placeholder="enter description"
           className="px-5 py-2 rounded-lg border border-1 border-black"
           name="description"
-          { ...register("slug", {
+          { ...register("description", {
             required: true,
             minLength: 4 || "minimum length of 4",
             }) }
           />
         </div>
 
-        <Button className={'w-fit h-fit place-self-center px-5 py-3 col-span-2 bg-white border border-1 border-black shadow-md'} > Submit </Button>
+        <Button type="submit" className={'w-fit h-fit place-self-center px-5 py-3 col-span-2 bg-white border border-1 border-black shadow-md'} > Submit </Button>
       </form>
     </div>
   )

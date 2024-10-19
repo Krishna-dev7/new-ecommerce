@@ -16,7 +16,7 @@ class Cloud {
     try {
       const fileId = await this.storage.createFile(
         conf.storage_id,
-        ID.unique,
+        ID.unique(),
         file
       )
       return fileId;
@@ -31,6 +31,7 @@ class Cloud {
         conf.storage_id,
         fileId
       )
+
       return preview ? preview.href : false;
     } catch (error) {
       console.log(error.message);
