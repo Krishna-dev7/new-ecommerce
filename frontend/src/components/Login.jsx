@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice.js";
 import video from "../assets/login.mp4";
+import { ToastContainer, toast } from "react-toastify";
 
 function Login() {
 
@@ -31,7 +32,11 @@ function Login() {
 
     const loginResult = await authService.login(formData);
     if(loginResult) {
-      console.log(loginResult);
+      toast("login done!", {
+        theme: 'dark',
+        autoClose: 3000,
+        closeButton: true,
+    })
       dispatch(login(loginResult));
       navigate("/");
     }

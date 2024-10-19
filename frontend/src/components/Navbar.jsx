@@ -4,6 +4,7 @@ import {assets} from "../assets/assets"
 import {Link} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { logout } from "../store/authSlice.js"
+import { ToastContainer, toast } from "react-toastify"
 
 function Navbar() {
 
@@ -19,6 +20,7 @@ function Navbar() {
     <div className="dropdown">
         
     </div>
+    <ToastContainer role="success" />
     <div className='w-screen px-3 py-4 text-sm font-semibold flex justify-between items-center bg-white'>
             <div className='logo ml-4'>
                 {/* <img className='w-20 h-20 md:w-28 duration-300' src={assets.logo} alt="" /> */}
@@ -46,6 +48,11 @@ function Navbar() {
                      onClick={ async () => {
                         const res = await authService.logout();
                         res ? dispatch(logout()) : null;
+                        res ? toast("logout done!", {
+                            theme: 'dark',
+                            autoClose: 3000,
+                            closeButton: true
+                        }) : null;
                     } } >
                         Logout
                     </button>

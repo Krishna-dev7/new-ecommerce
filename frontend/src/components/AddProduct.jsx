@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import productService from "../app/productService";
 import cloudService from "../app/cloudService";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddProduct() {
   const { register, handleSubmit } = useForm();
@@ -15,7 +17,7 @@ function AddProduct() {
     const image = await cloudService.getFilePreview(fileId.$id);
     if (image) {
       productService.createProduct({...data, image})
-      .then(res => console.log(res))
+      .then(res => toast("product added successfully"))
       .catch(err => setError(err))
     } else {
       console.log("fileid is null");
@@ -24,6 +26,7 @@ function AddProduct() {
 
   return (
     <div className="w-full bg-purple-200 shadow-lg border border-1 border-black py-10 rounded-lg flex flex-col my-10 justify-center items-center" >
+      <ToastContainer />
       <h1 className="text-3xl mb-6 font-normal">  Add <span className="underline" >Product</span> </h1>
       <form
         className="w-full py-10 px-20 grid grid-cols-2 "

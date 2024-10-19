@@ -5,6 +5,8 @@ import authService from "../app/authService.js";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice.js";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signup() {
 
@@ -41,6 +43,11 @@ function Signup() {
       const result = await authService.createAccount(formData);
       if(result) {
         console.log("signup result: ",result);
+        toast("signup done!", {
+          theme: 'dark',
+          autoClose: 3000,
+          closeButton: true,
+      })
         dispatch(login(result));
         navigate("/");
       }
@@ -53,6 +60,7 @@ function Signup() {
 
   return (
     <div className=" flex justify-center items-center h-screen w-screen">
+      <ToastContainer role="success" />
     <div className="w-96 p-6 shadow-lg rounded-md border-solid border-4 border-indigo-600">
       <h1 className="text-white text-center font-bold text-xl  decoration-green-400">Signup form</h1>
       <hr className="border-double border-indigo-600 border-2 mt-2"></hr>

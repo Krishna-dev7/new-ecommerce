@@ -39,10 +39,11 @@ class AuthService{
     try {
       const res = await axios.post("/api/users/logout");
       console.log(res);
-      if(res.data.statusCode < 400) {
+      if(res.data) {
         console.log("logout successfully");
+        return true;
       }
-      return res.data.statusCode < 400;
+      return false;
     } catch (error) {
       console.log("auth service logout error: ", error.message);
     }
