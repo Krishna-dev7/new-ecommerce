@@ -51,8 +51,14 @@ function Navbar() {
                         res ? toast("logout done!", {
                             theme: 'dark',
                             autoClose: 3000,
-                            closeButton: true
-                        }) : null;
+                            closeButton: true,
+                            closeOnClick: true
+                        }) : toast("logout failed", {
+                            theme: 'light',
+                            autoClose: 3000,
+                            closeButton: true,
+                            closeOnClick: true,
+                        });
                     } } >
                         Logout
                     </button>

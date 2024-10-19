@@ -40,6 +40,7 @@ class AuthService{
       const res = await axios.post("/api/users/logout");
       console.log(res);
       if(res.data) {
+        console.log(res.data);
         console.log("logout successfully");
         return true;
       }

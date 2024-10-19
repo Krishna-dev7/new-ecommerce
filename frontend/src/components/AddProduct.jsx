@@ -17,7 +17,11 @@ function AddProduct() {
     const image = await cloudService.getFilePreview(fileId.$id);
     if (image) {
       productService.createProduct({...data, image})
-      .then(res => toast("product added successfully"))
+      .then(res => toast("product added successfully", {
+        autoClose: 3000,
+        closeOnClick: true,
+        closeButton: true
+      }))
       .catch(err => setError(err))
     } else {
       console.log("fileid is null");

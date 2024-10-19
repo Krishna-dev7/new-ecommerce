@@ -4,6 +4,7 @@ import productService from "../app/productService.js";
 import { useEffect, useState } from "react";
 import Product from "../components/Product.jsx";
 import { assets } from "../assets/assets.js";
+import { ToastContainer } from "react-toastify";
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -20,7 +21,7 @@ function Home() {
   return (
     <>  
       <div className=" mt-15 gap-10 rounded-md h-fit w-full items-center flex flex-col justify-center text-white">
-
+      <ToastContainer />
         { products?.length > 0 ? products.map( p => {
           return <Product
            key={p._id} className="flex justify-center items-center border-2 text-orange-600 rounded w-2/3 z-20">

@@ -34,8 +34,8 @@ function Login() {
     if(loginResult) {
       toast("login done!", {
         theme: 'dark',
-        autoClose: 3000,
-        closeButton: true,
+        autoClose: 2000,
+        closeOnClick: true  
     })
       dispatch(login(loginResult));
       navigate("/");
@@ -45,6 +45,7 @@ function Login() {
 
   return (
     <div className="flex justify-center items-center h-screen w-screen">
+      <ToastContainer />
       <div className="login w-2/3 h-3/4 -mt-20 flex justify-normal items-center shadow-lg rounded-md border-solid border border-1 border-black">
         <div className="left h-full bg-purple-300 w-1/2">
           <video src={video} className="w-full h-full object-cover" autoplay="true" loop="true" ></video>
