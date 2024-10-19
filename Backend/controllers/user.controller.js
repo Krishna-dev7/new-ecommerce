@@ -40,7 +40,7 @@ async function registerUser(req, res) {
 
   res
   .status(200)
-  .json({user});
+  .json(user);
 }
 
 async function search(req, res) {
@@ -66,9 +66,8 @@ async function loginUser(req, res) {
     const verifiedUser = await existingUser.comparePassword(password);
     if(!verifiedUser) {
       console.log("verified User: ", verifiedUser);
-      res.json(new APIResponse(400, "invalid password"));
+      return res.json(new APIResponse(400, "invalid password"));
     }
-    console.log("verifiedUser: ", verifiedUser);
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshToken(existingUser._id);
     const options = {

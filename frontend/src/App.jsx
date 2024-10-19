@@ -30,7 +30,7 @@ function App() {
         <div className='navbar-div fixed' >
         <Navbar />
         </div>
-        <div className='h-fit mt-20 min-h-screen max-h-fit gorw' >
+        <div className='h-fit mt-20 min-h-screen max-h-fit grow' >
           <Outlet />
         </div>
         <div>
