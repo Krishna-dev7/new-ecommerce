@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import userRouter from "./routes/user.routes.js"
 import productRouter from "./routes/product.routes.js"
 import cartRouter from "./routes/cart.routes.js";
+import orderRouter from "./routes/order.routes.js";
 import cookieParser from "cookie-parser";
 import APIResponse from "./utils/APIResponse.js";
 const app = express();
@@ -52,6 +53,8 @@ app.use("/api/users", userRouter);
 app.use("/api/carts", cartRouter);
 // productService
 app.use("/api/products", productRouter);
+// orderService
+app.use("/api/orders", orderRouter);
 
 
 app.use((err, req, res, next) => {

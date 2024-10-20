@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class Cart {
-  url = "api/carts";
+  url = "/api/carts";
 
   async getCart(id){
     try {
@@ -39,7 +39,7 @@ class Cart {
     quantity
   }) {
     try {
-      const cart = await  axios.put(`${this.url}${id}`, {quantity})
+      const cart = await  axios.put(`${this.url}/${id}`, {quantity})
       return cart;
     } catch (error) {
       console.log(error.message);
@@ -49,7 +49,7 @@ class Cart {
 
   async deleteCart(id) {
     try {
-      const  cart = await axios.delete(`${this.url}${id}`)
+      const  cart = await axios.delete(`${this.url}/${id}`)
       return cart;
     } catch (error) {
       console.log(error.message);

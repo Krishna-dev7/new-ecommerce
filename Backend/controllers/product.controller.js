@@ -10,10 +10,10 @@ export async function listProducts(req, res) {
 }
 
 export async function getProduct(req , res) {
-  const {productId} = req.params;
-  const  product = await Product.findById(productId);
+  const {id} = req.params;
+  const  product = await Product.findById(id);
   if (product) {
-    res.json(product);
+    return res.json(product);
   }
   res.json({});
 }

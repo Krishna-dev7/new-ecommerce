@@ -13,6 +13,7 @@ import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AddProduct from './components/AddProduct.jsx'
 import 'react-toastify/dist/ReactToastify.css';
+import Checkout from './components/Checkout.jsx'
 import { ToastContainer } from 'react-toastify'
 
 const router = createBrowserRouter([
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/ProductDetail/:id",
         element: <ProductDetail />
+      }, 
+      {
+        path: "/Checkout",
+        element: <Checkout />
       }
     ]
   }

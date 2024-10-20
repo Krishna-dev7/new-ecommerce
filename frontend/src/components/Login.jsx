@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice.js";
 import video from "../assets/login.mp4";
 import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
 
@@ -32,7 +33,7 @@ function Login() {
 
     const loginResult = await authService.login(formData);
     if(loginResult) {
-      toast("login done!", {
+      toast.success("login done!", {
         theme: 'dark',
         autoClose: 2000,
         closeOnClick: true  
@@ -45,7 +46,7 @@ function Login() {
 
   return (
     <div className="flex justify-center items-center h-screen w-screen">
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <div className="login w-2/3 h-3/4 -mt-20 flex justify-normal items-center shadow-lg rounded-md border-solid border border-1 border-black">
         <div className="left h-full bg-purple-300 w-1/2">
           <video src={video} className="w-full h-full object-cover" autoplay="true" loop="true" ></video>

@@ -3,7 +3,7 @@ import Cart from "../models/cart.model.js";
 export async function listCartItems(req, res) {
   const userId = req.user._id;
   if (userId) {
-    const cartItems = await Cart.find({ userId });
+    const cartItems = await Cart.find({ userId }).populate('productId');
     return res.json(cartItems);
   }
   res.json(false);

@@ -18,7 +18,7 @@ class Product {
 
   async getProduct(productId) {
     try {
-      const product = await axios.get(`${this.url}${productId}`);
+      const product = await axios.get(`${this.url}/${productId}`);
       return product;
     } catch (error) {
       console.log(error.message);

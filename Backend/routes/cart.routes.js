@@ -14,15 +14,15 @@ router
   .post( verifyJwt ,asyncHandler(createCart));
 
 router  
-  .route(":id")
+  .route("/:id")
   .get(asyncHandler(getCartItem))
 
 router
-  .route(":id")
+  .route("/:id")
   .put(asyncHandler(updateCart))
 
 router
-  .route(":id")
+  .route("/:id")
   .delete(asyncHandler(deleteCart));
 
 

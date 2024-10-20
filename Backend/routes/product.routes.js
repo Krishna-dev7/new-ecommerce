@@ -13,15 +13,15 @@ router
   .post( verifyJwt ,asyncHandler(createProduct));
 
 router
-  .route(":id")
+  .route("/:id")
   .get(asyncHandler(getProduct))
 
 router
-  .route(":id")
+  .route("/:id")
   .put(verifyJwt, asyncHandler(updateProduct))
 
 router
-  .route(":id")
+  .route("/:id")
   .delete(verifyJwt, asyncHandler(deleteProduct))
 
 export default router;

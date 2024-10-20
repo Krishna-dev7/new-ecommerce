@@ -1,10 +1,10 @@
 import React from 'react'
-
+import OrderComponent from '../components/Order'
 
 function Order() {
   return (
-    <div>
-      
+    <div className='w-screen'>
+      <OrderComponent />
     </div>
   )
 }

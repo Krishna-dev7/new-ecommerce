@@ -26,6 +26,7 @@ class AuthService{
   async login({email, password}) {
     try {
       const res = await axios.post("/api/users/login", {email, password});
+      console.log(res);
       if(res.data.statusCode < 400) {
         console.log("login successful");
         return res.data.data.user;
