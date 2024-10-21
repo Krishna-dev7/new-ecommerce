@@ -2,7 +2,7 @@ import { Account, Storage, Client, ID } from "appwrite";
 import axios from "axios";
 import conf from "../conf/conf.js";
 axios.defaults.baseURL=conf.hosturl;
-
+axios.defaults.withCredentials=true;
 class Cloud {
   storage;
   client = new Client();
