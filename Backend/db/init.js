@@ -3,7 +3,7 @@ import Product from "../models/product.model.js";
 
 async function  connectDB() {
   try {
-    await mongoose.connect("mongodb://localhost:27017/ecommerce");
+    await mongoose.connect(process.env.MONGODB_URL);
     console.log("database connected successfully");
   } catch (error) {
     console.log(error.message);
