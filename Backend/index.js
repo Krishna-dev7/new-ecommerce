@@ -12,7 +12,8 @@ const app = express();
 
 import cors from "cors"
 app.use(cors({
-  origin: "https://frontend-u35u.onrender.com"
+  origin: "https://frontend-u35u.onrender.com",
+  credentials: true
 }));
 
 async function connectDB() {
