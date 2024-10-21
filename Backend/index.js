@@ -10,6 +10,9 @@ import cookieParser from "cookie-parser";
 import APIResponse from "./utils/APIResponse.js";
 const app = express();
 
+import cors from "cors"
+app.use(cors());
+
 async function connectDB() {
   try {
     const conn = await mongoose.connect(process.env.MONGODB_URL, {

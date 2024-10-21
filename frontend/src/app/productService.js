@@ -50,7 +50,7 @@ class Product {
     image,
   }) {
     try {
-      const product = await axios.put(`${this.url}${id}`, {
+      const product = await axios.put(`${this.url}/${id}`, {
         slug, description,  price,  quantity, image
       });
       return product;
@@ -61,7 +61,7 @@ class Product {
 
   async deleteProduct(id) {
     try {
-      const product = await axios.delete(`${this.url}${id}`);
+      const product = await axios.delete(`${this.url}/${id}`);
       return product;
     } catch (error) {
       console.log(error.message);
