@@ -31,7 +31,7 @@ async function connectDB() {
 
 connectDB()
 .then ( () => {
-  app.listen(process.env.PORT, () => {
+  app.listen(process.env.PORT || 3000, () => {
     console.log("server started listening at port: ", process.env.PORT);
   });
 })
