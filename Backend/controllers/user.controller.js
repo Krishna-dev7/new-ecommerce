@@ -71,7 +71,7 @@ async function loginUser(req, res) {
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshToken(existingUser._id);
     const options = {
-      httpOnly: true,
+      httpOnly: false,
       secure: true,
       sameSite: 'None',
       Credential: true
