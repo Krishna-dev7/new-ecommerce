@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': "https://new-ecommerce-1-k2dc.onrender.com" || "http://localhost:3000",
+      "/api": "https://new-ecommerce-1-k2dc.onrender.com",
     }
   }
 })
