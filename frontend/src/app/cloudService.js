@@ -1,5 +1,7 @@
 import { Account, Storage, Client, ID } from "appwrite";
+import axios from "axios";
 import conf from "../conf/conf.js";
+axios.defaults.baseURL=conf.hosturl;
 
 class Cloud {
   storage;

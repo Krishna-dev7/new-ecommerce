@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import conf from "../conf/conf.js";
+axios.defaults.baseURL=conf.hosturl;
 
 class AuthService{
   // create Account

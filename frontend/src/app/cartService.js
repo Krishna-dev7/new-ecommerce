@@ -1,4 +1,6 @@
 import axios from "axios";
+import conf from "../conf/conf.js";
+axios.defaults.baseURL=conf.hosturl;
 
 class Cart {
   url = "/api/carts";

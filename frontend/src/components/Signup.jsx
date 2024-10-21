@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice.js";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import conf from "../conf/conf.js";
+axios.defaults.baseURL=conf.hosturl;
 
 function Signup() {
   const initialData = {
