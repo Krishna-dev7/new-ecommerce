@@ -17,7 +17,7 @@ function Home() {
 
   return (
     <>  
-      <div className=" mt-15 gap-10 rounded-md h-fit w-full items-center flex flex-col justify-center text-white">
+      <div className=" mt-15 gap-10 rounded-md h-fit w-screen items-center flex flex-col justify-center text-white">
         { products?.length > 0 ? products.map( p => {
           return <Product
            key={p._id} className="flex justify-center items-center border-2 text-orange-600 rounded w-2/3 z-20">
