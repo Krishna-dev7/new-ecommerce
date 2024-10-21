@@ -2,8 +2,10 @@ import axios from "axios";
 import conf from "../conf/conf.js";
 axios.defaults.baseURL=conf.hosturl;
 axios.defaults.withCredentials=true;
-token = localStorage.getItem("accessToken");
-token ?? ( axios.defaults.headers.common['Authorization'] = `${token}`);
+const token = localStorage.getItem("accessToken");
+if (token) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
 class Product {
   url = "/api/products";
 
