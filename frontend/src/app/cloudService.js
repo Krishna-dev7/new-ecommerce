@@ -4,7 +4,7 @@ import conf from "../conf/conf.js";
 axios.defaults.baseURL=conf.hosturl;
 axios.defaults.withCredentials=true;
 token = localStorage.getItem("accessToken");
-token &&( axios.defaults.headers.common['Authorization'] = `${token}`);
+token ?? (axios.defaults.headers.common['Authorization'] = `${token}`);
 class Cloud {
   storage;
   client = new Client();
