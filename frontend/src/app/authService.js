@@ -2,6 +2,9 @@ import axios from "axios";
 import conf from "../conf/conf.js";
 axios.defaults.baseURL=conf.hosturl;
 axios.defaults.withCredentials=true;
+token = localStorage.getItem("accessToken");
+token &&( axios.defaults.headers.common['Authorization'] = `${token}`);
+
 class AuthService{
   // create Account
   async createAccount({username, email, password, fullName}) {
