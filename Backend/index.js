@@ -11,7 +11,9 @@ import APIResponse from "./utils/APIResponse.js";
 const app = express();
 
 import cors from "cors"
-app.use(cors());
+app.use(cors({
+  origin: "https://frontend-u35u.onrender.com"
+}));
 
 async function connectDB() {
   try {
