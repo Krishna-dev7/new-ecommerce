@@ -151,11 +151,8 @@ function Signup() {
           </div>
 
           <div className="flex justify-between space-x-4">
-            <button type="submit" className="w-full py-2 text-white bg-deep-blue hover:bg-deep-blue-dark rounded-md transition duration-200">
+            <button type="submit" className="w-full py-2 text-white bg-blue-500 hover:bg-deep-blue-dark rounded-md transition duration-200">
               Submit
-            </button>
-            <button type="reset" className="w-full py-2 text-white bg-gray-600 hover:bg-gray-700 rounded-md transition duration-200">
-              Reset
             </button>
           </div>
         </form>
