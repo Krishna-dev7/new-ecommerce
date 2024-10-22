@@ -77,9 +77,6 @@ async function loginUser(req, res) {
       Credential: true
     }
 
-    localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("refreshToken", refreshToken);
-
     res
       .status(200)
       .cookie("access token", accessToken, options)
