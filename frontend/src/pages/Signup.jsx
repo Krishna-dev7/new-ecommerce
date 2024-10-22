@@ -1,7 +1,7 @@
 import SignupPage from "../components/Signup";
 function Signup() {
   return (
-    <div>
+    <div className="w-screen">
       <SignupPage />
     </div>
   )
