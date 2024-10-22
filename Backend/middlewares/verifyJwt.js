@@ -5,9 +5,9 @@ import APIResponse from "../utils/APIResponse.js";
 async function verifyJwt(req, res, next) {
  try {
   const accessToken = req.cookies['access token'];
-  const authorization = req.headers['Authorization'];
+  // const authorization = req.headers['Authorization'];
   // console.log("access token: " + accessToken);
-  if(!accessToken && !authorization) {
+  if(!accessToken) {
     return res.json(new APIResponse(400, "unauthorized request"));
   }
 
